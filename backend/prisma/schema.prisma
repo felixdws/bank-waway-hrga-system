@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id        String   @id @default(uuid())
+
+  name      String
+  email     String   @unique
+  password  String
+
+  role      String   @default("employee")
+
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  actorId   String
+  targetId  String?
+  createdAt DateTime @default(now())
+}
+
+model Asset {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  serialNumber String
+  status      String
+  assignedTo  String?
+  createdAt   DateTime @default(now())
+}
+
+model AssetRequest {
+  id            String   @id @default(cuid())
+  employeeName  String
+  assetName     String
+  quantity      Int
+  status        String   @default("pending")
+  approvedBy    String?
+  createdAt     DateTime @default(now())
+}
