@@ -1,6 +1,9 @@
 import { PrismaClient }
   from "@prisma/client"
 
+import { enableCors }
+  from "../../lib/cors"
+
 const prisma =
   new PrismaClient()
 
@@ -8,6 +11,14 @@ export default async function handler(
   req: any,
   res: any
 ) {
+
+  /* ====================== */
+  /* ENABLE CORS */
+  /* ====================== */
+
+  if (
+    enableCors(req, res)
+  ) return
 
   try {
 
@@ -58,6 +69,10 @@ export default async function handler(
       })
 
     }
+
+    /* ====================== */
+    /* METHOD NOT ALLOWED */
+    /* ====================== */
 
     return res.status(405).json({
       success: false,

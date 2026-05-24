@@ -1,6 +1,9 @@
 import { PrismaClient }
   from "@prisma/client"
 
+import { enableCors }
+  from "../../../lib/cors"
+
 const prisma =
   new PrismaClient()
 
@@ -9,7 +12,19 @@ export default async function handler(
   res: any
 ) {
 
+  /* ====================== */
+  /* ENABLE CORS */
+  /* ====================== */
+
+  if (
+    enableCors(req, res)
+  ) return
+
   try {
+
+    /* ====================== */
+    /* METHOD CHECK */
+    /* ====================== */
 
     if (req.method !== "PUT") {
 
@@ -21,8 +36,16 @@ export default async function handler(
 
     }
 
+    /* ====================== */
+    /* GET ID */
+    /* ====================== */
+
     const { id } =
       req.query
+
+    /* ====================== */
+    /* UPDATE REQUEST */
+    /* ====================== */
 
     const request =
       await prisma.assetRequest.update({
@@ -33,6 +56,10 @@ export default async function handler(
           status: "approved",
         },
       })
+
+    /* ====================== */
+    /* SUCCESS */
+    /* ====================== */
 
     return res.status(200).json({
       success: true,
