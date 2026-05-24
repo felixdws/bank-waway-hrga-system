@@ -27,16 +27,46 @@ import assetRequestRoutes from "./routes/asset-request/assetRequest.routes"
 
 const app = express()
 
+/* ========================= */
+/* TRUST PROXY */
+/* REQUIRED FOR VERCEL */
+/* ========================= */
+
+app.set("trust proxy", 1)
+
+/* ========================= */
+/* SECURITY */
+/* ========================= */
+
 app.use(helmet())
+
+/* ========================= */
+/* CORS */
+/* ========================= */
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "https://your-frontend.vercel.app",
+    ],
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: [
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE",
+    ],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+    ],
   })
 )
+
+/* ========================= */
+/* MIDDLEWARES */
+/* ========================= */
 
 app.use(express.json())
 
@@ -45,6 +75,10 @@ app.use(cookieParser())
 app.use(morgan("dev"))
 
 app.use(limiter)
+
+/* ========================= */
+/* ROUTES */
+/* ========================= */
 
 app.use("/api/auth", authRoutes)
 
@@ -59,39 +93,73 @@ app.use(
   assetRequestRoutes
 )
 
+/* ========================= */
+/* ROOT */
+/* ========================= */
+
 app.get("/", (req, res) => {
   res.send("Bank Waway HRGA API Running")
 })
 
+/* ========================= */
+/* TEST DATABASE */
+/* ========================= */
+
 app.get("/test-db", async (req, res) => {
-  const employees = await prisma.employee.findMany()
+
+  const employees =
+    await prisma.employee.findMany()
 
   res.json(employees)
+
 })
+
+/* ========================= */
+/* PROTECTED ROUTE */
+/* ========================= */
 
 app.get(
   "/protected",
   authMiddleware,
-  async (req: AuthRequest, res) => {
+  async (
+    req: AuthRequest,
+    res
+  ) => {
+
     return res.json({
       success: true,
-      message: "Protected route accessed",
+      message:
+        "Protected route accessed",
       user: req.user,
     })
+
   }
 )
+
+/* ========================= */
+/* ADMIN ONLY */
+/* ========================= */
 
 app.get(
   "/admin-only",
   authMiddleware,
   rbacMiddleware("admin"),
-  async (req: AuthRequest, res) => {
+  async (
+    req: AuthRequest,
+    res
+  ) => {
+
     return res.json({
       success: true,
       message: "Welcome Admin",
     })
+
   }
 )
+
+/* ========================= */
+/* ERROR HANDLER */
+/* ========================= */
 
 app.use(errorMiddleware)
 
