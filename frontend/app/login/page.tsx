@@ -35,9 +35,7 @@ export default function LoginPage() {
             email,
             password,
           },
-          {
-            withCredentials: true,
-          }
+          
         )
 
       // SUCCESS TOAST
