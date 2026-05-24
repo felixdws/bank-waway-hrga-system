@@ -220,7 +220,7 @@ export default function DashboardPage() {
         Cookies.get("token")
 
       await axios.post(
-        "http://localhost:5000/api/employees",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/employees`,
         {
           name,
           email,
@@ -259,7 +259,7 @@ export default function DashboardPage() {
         Cookies.get("token")
 
       await axios.post(
-        "http://localhost:5000/api/assets",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/assets`,
         {
           name: assetName,
           category: assetCategory,
@@ -300,7 +300,7 @@ export default function DashboardPage() {
         Cookies.get("token")
 
       await axios.post(
-        "http://localhost:5000/api/asset-requests",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/asset-requests`,
         {
           employeeName:
             requestEmployee,
