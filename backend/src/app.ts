@@ -74,7 +74,14 @@ app.use(cookieParser())
 
 app.use(morgan("dev"))
 
-app.use(limiter)
+if (
+  process.env.NODE_ENV !==
+  "production"
+) {
+
+  app.use(limiter)
+
+}
 
 /* ========================= */
 /* ROUTES */
