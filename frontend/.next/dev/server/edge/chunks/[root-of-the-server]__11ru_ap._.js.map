@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 16, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/middleware.ts"],"sourcesContent":["import { NextResponse } from \"next/server\"\r\nimport type { NextRequest } from \"next/server\"\r\n\r\nexport function middleware(req: NextRequest) {\r\n  const token = req.cookies.get(\"token\")\r\n\r\n  if (!token) {\r\n    return NextResponse.redirect(\r\n      new URL(\"/login\", req.url)\r\n    )\r\n  }\r\n\r\n  return NextResponse.next()\r\n}\r\n\r\nexport const config = {\r\n  matcher: [\"/dashboard/:path*\"],\r\n}"],"names":["middleware","req","token","cookies","get","redirect","URL","url","next","config","matcher"],"mappings":";;;;;;AAAA;AAAA;;AAGO,SAASA,WAAWC,GAAgB;IACzC,MAAMC,QAAQD,IAAIE,OAAO,CAACC,GAAG,CAAC;IAE9B,IAAI,CAACF,OAAO;QACV,OAAO,6MAAY,CAACG,QAAQ,CAC1B,IAAIC,IAAI,UAAUL,IAAIM,GAAG;IAE7B;IAEA,OAAO,6MAAY,CAACC,IAAI;AAC1B;AAEO,MAAMC,SAAS;IACpBC,SAAS;QAAC;KAAoB;AAChC"}}]
+}

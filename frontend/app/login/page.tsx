@@ -89,7 +89,7 @@ export default function LoginPage() {
 
   return (
 
-    <div className="min-h-screen flex items-center justify-center bg-[#fff7ed] px-6">
+    <div suppressHydrationWarning className="min-h-screen flex items-center justify-center bg-[#fff7ed] px-6">
 
       {/* LOGIN CARD */}
       <div className="w-full max-w-md bg-white border border-red-100 rounded-[32px] shadow-2xl p-10">
