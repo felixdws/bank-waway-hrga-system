@@ -101,7 +101,7 @@ export default function DashboardPage() {
 
       const response =
         await axios.get(
-          "http://localhost:5000/api/employees",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/employees`,
           {
             headers: {
               Authorization:
@@ -131,7 +131,7 @@ export default function DashboardPage() {
 
       const response =
         await axios.get(
-          "http://localhost:5000/api/audit-logs",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/audit-logs`,
           {
             headers: {
               Authorization:
@@ -161,7 +161,7 @@ export default function DashboardPage() {
 
       const response =
         await axios.get(
-          "http://localhost:5000/api/assets",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/assets`,
           {
             headers: {
               Authorization:
@@ -191,7 +191,7 @@ export default function DashboardPage() {
 
       const response =
         await axios.get(
-          "http://localhost:5000/api/asset-requests",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/asset-requests`,
           {
             headers: {
               Authorization:
@@ -342,7 +342,7 @@ export default function DashboardPage() {
         Cookies.get("token")
 
       await axios.put(
-        `http://localhost:5000/api/asset-requests/${id}/approve`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/asset-requests/${id}/approve`,
         {},
         {
           headers: {
@@ -374,7 +374,7 @@ export default function DashboardPage() {
         Cookies.get("token")
 
       await axios.put(
-        `http://localhost:5000/api/asset-requests/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/asset-requests/${id}`,
         data,
         {
           headers: {
