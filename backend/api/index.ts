@@ -1,13 +1,11 @@
-import serverless
-  from "serverless-http"
-
 import app
   from "../src/app"
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
+export default async function handler(
+  req: any,
+  res: any
+) {
 
-export default serverless(app)
+  return app(req, res)
+
+}
