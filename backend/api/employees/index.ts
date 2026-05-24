@@ -11,9 +11,9 @@ export default async function handler(
 
   try {
 
-    /* ========================= */
+    /* ====================== */
     /* GET EMPLOYEES */
-    /* ========================= */
+    /* ====================== */
 
     if (req.method === "GET") {
 
@@ -24,21 +24,23 @@ export default async function handler(
           },
         })
 
-      return res.status(200).json(
-        employees
-      )
+      return res.status(200).json({
+        success: true,
+        employees,
+      })
 
     }
 
-    /* ========================= */
+    /* ====================== */
     /* CREATE EMPLOYEE */
-    /* ========================= */
+    /* ====================== */
 
     if (req.method === "POST") {
 
       const {
         name,
         email,
+        password,
         role,
       } = req.body
 
@@ -47,6 +49,7 @@ export default async function handler(
           data: {
             name,
             email,
+            password,
             role,
           },
         })
@@ -57,10 +60,6 @@ export default async function handler(
       })
 
     }
-
-    /* ========================= */
-    /* METHOD NOT ALLOWED */
-    /* ========================= */
 
     return res.status(405).json({
       success: false,
