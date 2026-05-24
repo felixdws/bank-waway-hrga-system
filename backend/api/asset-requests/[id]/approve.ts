@@ -1,0 +1,54 @@
+import { PrismaClient }
+  from "@prisma/client"
+
+const prisma =
+  new PrismaClient()
+
+export default async function handler(
+  req: any,
+  res: any
+) {
+
+  try {
+
+    if (req.method !== "PUT") {
+
+      return res.status(405).json({
+        success: false,
+        message:
+          "Method not allowed",
+      })
+
+    }
+
+    const { id } =
+      req.query
+
+    const request =
+      await prisma.assetRequest.update({
+        where: {
+          id: String(id),
+        },
+        data: {
+          status: "approved",
+        },
+      })
+
+    return res.status(200).json({
+      success: true,
+      request,
+    })
+
+  } catch (error) {
+
+    console.log(error)
+
+    return res.status(500).json({
+      success: false,
+      message:
+        "Internal server error",
+    })
+
+  }
+
+}

@@ -12,13 +12,13 @@ export default async function handler(
   try {
 
     /* ====================== */
-    /* GET ASSETS */
+    /* GET LOGS */
     /* ====================== */
 
     if (req.method === "GET") {
 
-      const assets =
-        await prisma.asset.findMany({
+      const logs =
+        await prisma.auditLog.findMany({
           orderBy: {
             createdAt: "desc",
           },
@@ -26,46 +26,38 @@ export default async function handler(
 
       return res.status(200).json({
         success: true,
-        assets,
+        logs,
       })
 
     }
 
     /* ====================== */
-    /* CREATE ASSET */
+    /* CREATE LOG */
     /* ====================== */
 
     if (req.method === "POST") {
 
       const {
-        name,
-        category,
-        serialNumber,
-        status,
-        assignedTo,
+        action,
+        actorId,
+        targetId,
       } = req.body
 
-      const asset =
-        await prisma.asset.create({
+      const log =
+        await prisma.auditLog.create({
           data: {
-            name,
-            category,
-            serialNumber,
-            status,
-            assignedTo,
+            action,
+            actorId,
+            targetId,
           },
         })
 
       return res.status(201).json({
         success: true,
-        asset,
+        log,
       })
 
     }
-
-    /* ====================== */
-    /* METHOD NOT ALLOWED */
-    /* ====================== */
 
     return res.status(405).json({
       success: false,

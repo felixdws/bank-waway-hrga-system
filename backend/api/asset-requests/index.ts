@@ -12,13 +12,13 @@ export default async function handler(
   try {
 
     /* ====================== */
-    /* GET ASSETS */
+    /* GET REQUESTS */
     /* ====================== */
 
     if (req.method === "GET") {
 
-      const assets =
-        await prisma.asset.findMany({
+      const requests =
+        await prisma.assetRequest.findMany({
           orderBy: {
             createdAt: "desc",
           },
@@ -26,46 +26,67 @@ export default async function handler(
 
       return res.status(200).json({
         success: true,
-        assets,
+        requests,
       })
 
     }
 
     /* ====================== */
-    /* CREATE ASSET */
+    /* CREATE REQUEST */
     /* ====================== */
 
     if (req.method === "POST") {
 
       const {
-        name,
-        category,
-        serialNumber,
-        status,
-        assignedTo,
+        employeeName,
+        assetName,
+        quantity,
       } = req.body
 
-      const asset =
-        await prisma.asset.create({
+      const request =
+        await prisma.assetRequest.create({
           data: {
-            name,
-            category,
-            serialNumber,
-            status,
-            assignedTo,
+            employeeName,
+            assetName,
+            quantity,
+            status: "pending",
           },
         })
 
       return res.status(201).json({
         success: true,
-        asset,
+        request,
       })
 
     }
 
     /* ====================== */
-    /* METHOD NOT ALLOWED */
+    /* UPDATE REQUEST */
     /* ====================== */
+
+    if (req.method === "PUT") {
+
+      const {
+        id,
+        status,
+      } = req.body
+
+      const request =
+        await prisma.assetRequest.update({
+          where: {
+            id,
+          },
+          data: {
+            status,
+          },
+        })
+
+      return res.status(200).json({
+        success: true,
+        request,
+      })
+
+    }
 
     return res.status(405).json({
       success: false,
