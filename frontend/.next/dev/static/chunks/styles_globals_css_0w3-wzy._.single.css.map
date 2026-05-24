@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/styles/globals.css"],"sourcesContent":["/*! tailwindcss v4.3.0 | MIT License | https://tailwindcss.com */\n:root {\n  --primary: #0047ab;\n  --secondary: #0f172a;\n  --background: #f5f7fb;\n  --card: #ffffff;\n  --text: #111827;\n  --text-light: #6b7280;\n  --success: #16a34a;\n  --danger: #dc2626;\n  --warning: #f59e0b;\n  --border: #e5e7eb;\n  --radius: 12px;\n}\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\nbody {\n  background: var(--background);\n  color: var(--text);\n  font-family: Arial, sans-serif;\n}\nbutton {\n  cursor: pointer;\n  border: none;\n}\ninput {\n  outline: none;\n}"],"names":[],"mappings":"AACA;;;;;;;;;;;;;;AAaA;;;;;;AAKA;;;;;;AAKA;;;;;AAIA"}}]
+}

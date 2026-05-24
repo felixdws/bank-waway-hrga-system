@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+/* ========================= */
+/* ROOT */
+/* ========================= */
+
+:root {
+  --primary: #991b1b;
+  --primary-light: #dc2626;
+  --primary-soft: #fef2f2;
+
+  --gold: #d4a017;
+
+  --background: #f8fafc;
+  --surface: #ffffff;
+
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+
+  --border: #e5e7eb;
+}
+
+/* ========================= */
+/* BASE */
+/* ========================= */
+
+html,
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  min-height: 100vh;
+}
+
+/* ========================= */
+/* SMOOTH */
+/* ========================= */
+
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+/* ========================= */
+/* SCROLLBAR */
+/* ========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(153, 27, 27, 0.35);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(153, 27, 27, 0.55);
+}
+
+/* ========================= */
+/* CARD */
+/* ========================= */
+
+.card {
+  @apply bg-white rounded-[28px] border border-gray-200 transition-all duration-300;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.card:hover {
+  box-shadow:
+    0 4px 8px rgba(15, 23, 42, 0.06),
+    0 18px 40px rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
+}
+
+/* ========================= */
+/* INPUT */
+/* ========================= */
+
+.input {
+  @apply w-full rounded-2xl border bg-white px-4 py-4 outline-none transition-all duration-200;
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:focus {
+  border-color: rgba(153, 27, 27, 0.45);
+  box-shadow:
+    0 0 0 4px rgba(220, 38, 38, 0.08);
+}
+
+/* ========================= */
+/* PRIMARY BUTTON */
+/* ========================= */
+
+.button-primary {
+  @apply rounded-2xl px-6 py-4 text-white font-semibold transition-all duration-200;
+  background: linear-gradient(
+    135deg,
+    #991b1b 0%,
+    #b91c1c 100%
+  );
+  box-shadow:
+    0 10px 24px rgba(153, 27, 27, 0.18);
+}
+
+.button-primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 14px 28px rgba(153, 27, 27, 0.24);
+}
+
+/* ========================= */
+/* SECONDARY BUTTON */
+/* ========================= */
+
+.button-secondary {
+  @apply rounded-2xl px-6 py-4 font-semibold transition-all duration-200;
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.button-secondary:hover {
+  background: #f9fafb;
+}
+
+/* ========================= */
+/* BADGES */
+/* ========================= */
+
+.badge-success {
+  @apply px-4 py-2 rounded-full text-sm font-semibold;
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.badge-warning {
+  @apply px-4 py-2 rounded-full text-sm font-semibold;
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.badge-danger {
+  @apply px-4 py-2 rounded-full text-sm font-semibold;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* ========================= */
+/* TABLE */
+/* ========================= */
+
+.table-container {
+  @apply overflow-hidden rounded-[28px] border bg-white;
+  border-color: var(--border);
+}
+
+.table-head {
+  background: #fafafa;
+  color: #374151;
+}
+
+.table-row {
+  @apply transition-all duration-200;
+  border-top: 1px solid #f3f4f6;
+}
+
+.table-row:hover {
+  background: #fafafa;
+}
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+
+.sidebar-gradient {
+  background:
+    linear-gradient(
+      180deg,
+      #450a0a 0%,
+      #7f1d1d 35%,
+      #111827 100%
+    );
+}
+
+/* ========================= */
+/* SIDEBAR ACTIVE */
+/* ========================= */
+
+.sidebar-active {
+  background:
+    linear-gradient(
+      135deg,
+      #b91c1c 0%,
+      #dc2626 100%
+    );
+
+  box-shadow:
+    0 12px 30px rgba(185, 28, 28, 0.28);
+}
+
+/* ========================= */
+/* SIDEBAR HOVER */
+/* ========================= */
+
+.sidebar-hover:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+/* ========================= */
+/* TITLE */
+/* ========================= */
+
+.page-title {
+  @apply text-5xl font-black tracking-tight;
+  color: #7f1d1d;
+}
+
+/* ========================= */
+/* SUBTITLE */
+/* ========================= */
+
+.page-subtitle {
+  color: var(--text-secondary);
+}
+
+/* ========================= */
+/* GOLD TEXT */
+/* ========================= */
+
+.gold-text {
+  color: var(--gold);
+}
+
+/* ========================= */
+/* PROFESSIONAL SHADOW */
+/* ========================= */
+
+.soft-shadow {
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.05),
+    0 16px 32px rgba(15, 23, 42, 0.06);
+}
+
+/* ========================= */
+/* GLASS */
+/* ========================= */
+
+.glass {
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  backdrop-filter: blur(14px);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ========================= */
+/* ANIMATIONS */
+/* ========================= */
+
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
