@@ -13,9 +13,13 @@ export default async function handler(
   res: any
 ) {
 
-     res.setHeader(
+  /* ========================= */
+  /* CORS */
+  /* ========================= */
+
+  res.setHeader(
     "Access-Control-Allow-Origin",
-    "*"
+    "https://bank-waway-hrga-system-frontend.vercel.app"
   )
 
   res.setHeader(
@@ -28,14 +32,26 @@ export default async function handler(
     "Content-Type, Authorization"
   )
 
+  res.setHeader(
+    "Access-Control-Allow-Credentials",
+    "true"
+  )
+
+  /* ========================= */
+  /* PREFLIGHT */
+  /* ========================= */
+
   if (req.method === "OPTIONS") {
 
     return res.status(200).end()
 
   }
 
-
   try {
+
+    /* ========================= */
+    /* METHOD CHECK */
+    /* ========================= */
 
     if (req.method !== "POST") {
 
@@ -47,10 +63,18 @@ export default async function handler(
 
     }
 
+    /* ========================= */
+    /* BODY */
+    /* ========================= */
+
     const {
       email,
       password,
     } = req.body
+
+    /* ========================= */
+    /* FIND USER */
+    /* ========================= */
 
     const user =
       await prisma.employee.findFirst({
@@ -69,6 +93,10 @@ export default async function handler(
 
     }
 
+    /* ========================= */
+    /* PASSWORD CHECK */
+    /* ========================= */
+
     const validPassword =
       await bcrypt.compare(
         password,
@@ -85,6 +113,10 @@ export default async function handler(
 
     }
 
+    /* ========================= */
+    /* TOKEN */
+    /* ========================= */
+
     const token =
       jwt.sign(
         {
@@ -96,6 +128,10 @@ export default async function handler(
           expiresIn: "7d",
         }
       )
+
+    /* ========================= */
+    /* SUCCESS */
+    /* ========================= */
 
     return res.status(200).json({
       success: true,
