@@ -1,11 +1,12 @@
-import app
-  from "../src/app"
-
 export default async function handler(
   req: any,
   res: any
 ) {
 
-  return app(req, res)
+  return res.status(200).json({
+    success: true,
+    message:
+      "Backend Running Successfully",
+  })
 
 }
