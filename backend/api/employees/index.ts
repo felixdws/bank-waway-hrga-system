@@ -1,6 +1,8 @@
 import { PrismaClient }
   from "@prisma/client"
 
+import bcrypt from "bcrypt"
+
 import { enableCors }
   from "../../lib/cors"
 
@@ -55,12 +57,48 @@ export default async function handler(
         role,
       } = req.body
 
+      /* ====================== */
+      /* CHECK EXISTING EMAIL */
+      /* ====================== */
+
+      const existingUser =
+        await prisma.employee.findFirst({
+          where: {
+            email,
+          },
+        })
+
+      if (existingUser) {
+
+        return res.status(400).json({
+          success: false,
+          message:
+            "Email already exists",
+        })
+
+      }
+
+      /* ====================== */
+      /* HASH PASSWORD */
+      /* ====================== */
+
+      const hashedPassword =
+        await bcrypt.hash(
+          password,
+          10
+        )
+
+      /* ====================== */
+      /* CREATE EMPLOYEE */
+      /* ====================== */
+
       const employee =
         await prisma.employee.create({
           data: {
             name,
             email,
-            password,
+            password:
+              hashedPassword,
             role,
           },
         })
