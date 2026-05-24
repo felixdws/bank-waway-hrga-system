@@ -7,7 +7,7 @@ import morgan from "morgan"
 import { limiter } from "./middlewares/rateLimit.middleware"
 import { errorMiddleware } from "./middlewares/error.middleware"
 
-import { prisma } from "./config/prisma"
+// import { prisma } from "./config/prisma"
 
 import authRoutes from "./routes/auth/auth.routes"
 import employeeRoutes from "./routes/employee/employee.routes"
@@ -29,7 +29,6 @@ const app = express()
 
 /* ========================= */
 /* TRUST PROXY */
-/* REQUIRED FOR VERCEL */
 /* ========================= */
 
 app.set("trust proxy", 1)
@@ -74,14 +73,17 @@ app.use(cookieParser())
 
 app.use(morgan("dev"))
 
-if (
-  process.env.NODE_ENV !==
-  "production"
-) {
+/* ========================= */
+/* DISABLE LIMITER */
+/* FOR VERCEL */
+/* ========================= */
 
-  app.use(limiter)
-
-}
+// if (
+//   process.env.NODE_ENV !==
+//   "production"
+// ) {
+//   app.use(limiter)
+// }
 
 /* ========================= */
 /* ROUTES */
@@ -105,21 +107,28 @@ app.use(
 /* ========================= */
 
 app.get("/", (req, res) => {
-  res.send("Bank Waway HRGA API Running")
+
+  res.send(
+    "Bank Waway HRGA API Running"
+  )
+
 })
 
 /* ========================= */
 /* TEST DATABASE */
 /* ========================= */
 
-app.get("/test-db", async (req, res) => {
+// app.get(
+//   "/test-db",
+//   async (req, res) => {
 
-  const employees =
-    await prisma.employee.findMany()
+//     const employees =
+//       await prisma.employee.findMany()
 
-  res.json(employees)
+//     res.json(employees)
 
-})
+//   }
+// )
 
 /* ========================= */
 /* PROTECTED ROUTE */
