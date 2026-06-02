@@ -12,19 +12,11 @@ export default async function handler(
   res: any
 ) {
 
-  /* ====================== */
-  /* ENABLE CORS */
-  /* ====================== */
-
   if (
     enableCors(req, res)
   ) return
 
   try {
-
-    /* ====================== */
-    /* GET REQUESTS */
-    /* ====================== */
 
     if (req.method === "GET") {
 
@@ -41,10 +33,6 @@ export default async function handler(
       })
 
     }
-
-    /* ====================== */
-    /* CREATE REQUEST */
-    /* ====================== */
 
     if (req.method === "POST") {
 
@@ -71,16 +59,26 @@ export default async function handler(
 
     }
 
-    /* ====================== */
-    /* UPDATE REQUEST */
-    /* ====================== */
-
     if (req.method === "PUT") {
 
       const {
         id,
         status,
       } = req.body
+
+      if (
+        ![
+          "pending",
+          "approved",
+          "rejected",
+        ].includes(status)
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Invalid status",
+        })
+      }
 
       const request =
         await prisma.assetRequest.update({
@@ -98,10 +96,6 @@ export default async function handler(
       })
 
     }
-
-    /* ====================== */
-    /* METHOD NOT ALLOWED */
-    /* ====================== */
 
     return res.status(405).json({
       success: false,

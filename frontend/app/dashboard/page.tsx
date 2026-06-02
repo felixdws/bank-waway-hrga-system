@@ -373,9 +373,12 @@ export default function DashboardPage() {
       const token =
         Cookies.get("token")
 
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/asset-requests/${id}`,
-        data,
+            await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/asset-requests`,
+        {
+          id,
+          ...data,
+        },
         {
           headers: {
             Authorization:
